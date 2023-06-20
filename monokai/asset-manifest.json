@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/monokai/static/css/main.3e3c6dcf.css",
+    "main.js": "/monokai/static/js/main.06a4f0f5.js",
+    "static/js/787.d7b0fe8a.chunk.js": "/monokai/static/js/787.d7b0fe8a.chunk.js",
+    "index.html": "/monokai/index.html",
+    "main.3e3c6dcf.css.map": "/monokai/static/css/main.3e3c6dcf.css.map",
+    "main.06a4f0f5.js.map": "/monokai/static/js/main.06a4f0f5.js.map",
+    "787.d7b0fe8a.chunk.js.map": "/monokai/static/js/787.d7b0fe8a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e3c6dcf.css",
+    "static/js/main.06a4f0f5.js"
+  ]
+}
