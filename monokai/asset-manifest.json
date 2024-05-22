@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/monokai/static/css/main.5c3621fa.css",
-    "main.js": "/monokai/static/js/main.bfb5602e.js",
+    "main.css": "/monokai/static/css/main.cc964dd7.css",
+    "main.js": "/monokai/static/js/main.bb3122ec.js",
     "static/js/787.d7b0fe8a.chunk.js": "/monokai/static/js/787.d7b0fe8a.chunk.js",
     "index.html": "/monokai/index.html",
-    "main.5c3621fa.css.map": "/monokai/static/css/main.5c3621fa.css.map",
-    "main.bfb5602e.js.map": "/monokai/static/js/main.bfb5602e.js.map",
+    "main.cc964dd7.css.map": "/monokai/static/css/main.cc964dd7.css.map",
+    "main.bb3122ec.js.map": "/monokai/static/js/main.bb3122ec.js.map",
     "787.d7b0fe8a.chunk.js.map": "/monokai/static/js/787.d7b0fe8a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c3621fa.css",
-    "static/js/main.bfb5602e.js"
+    "static/css/main.cc964dd7.css",
+    "static/js/main.bb3122ec.js"
   ]
 }
