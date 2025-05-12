@@ -39,12 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# vscode
-.vscode
-
-# package locks
-package-lock.json
-
-# output of 'npm build'
-/out/*

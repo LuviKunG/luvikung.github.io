@@ -3,17 +3,17 @@
 import React, { FC as FunctionComponent, useEffect } from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/Addons.js';
+import Link from 'next/link';
 
 const ThreeScene: FunctionComponent = () => {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-
   useEffect(() => {
     // Set up the canvas and renderer
     const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current!, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // Set up the camera and renderer
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.z = 5;
 
     // Set up the scene
@@ -32,29 +32,22 @@ const ThreeScene: FunctionComponent = () => {
     scene.add(ambientLight);
 
     // White Material
-    const whiteMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
+    const redMaterial = new THREE.MeshPhongMaterial({
+      color: 0xff0000,
       flatShading: true,
-    });
-
-    // White Material
-    const whiteMaterialWireframe = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      flatShading: true,
-      wireframe: true,
     });
 
     // Load mesh and add to scene
     const loader = new OBJLoader();
-    loader.load('/logo.obj', (logo) => {
+    loader.load('/cross.obj', (logo) => {
       logo.traverse((child) => {
         const mesh = child as THREE.Mesh;
         if (mesh.isMesh) {
-          mesh.material = whiteMaterial;
+          mesh.material = redMaterial;
         }
       });
       logo.position.set(0, 0, 0);
-      logo.scale.set(0.1, 0.1, 0.1);
+      logo.scale.set(1.0, 1.0, 1.0,);
       scene.add(logo);
 
       const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -66,8 +59,6 @@ const ThreeScene: FunctionComponent = () => {
         z: lerp(scale, -scale, Math.random()),
       }
 
-      console.log('randomDeltaRotation', randomDeltaRotation);
-
       function animate() {
         requestAnimationFrame(animate);
         const delta = clock.getDelta();
@@ -78,24 +69,10 @@ const ThreeScene: FunctionComponent = () => {
       }
 
       animate();
-
-      function animateTick() {
-        setTimeout(() => {
-          requestAnimationFrame(animateTick);
-        }, 150 * Math.random());
-        logo.traverse((child) => {
-          const mesh = child as THREE.Mesh;
-          if (mesh.isMesh) {
-            mesh.material = Math.random() > 0.1 ? whiteMaterial : whiteMaterialWireframe;
-          }
-        });
-      }
-
-      animateTick();
     });
 
     // Handle window resize
-    const handleResize = () => {
+    function handleResize() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       renderer.setSize(width, height);
@@ -112,22 +89,23 @@ const ThreeScene: FunctionComponent = () => {
       // Clean up the event listener and renderer on component unmount
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
-    }
+    };
   }, []);
-
   return (
-    <>
-      <canvas ref={canvasRef} className="w-full h-full" />
-    </>
+    <canvas ref={canvasRef} className="w-full h-full"></canvas>
   );
 };
 
-const Page: FunctionComponent = () => {
+const NotFound: FunctionComponent = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <ThreeScene />
+      <div className="absolute text-white" style={{ zIndex: 1, bottom: '1em' }}>
+        <h1 className="flexbox text-center text-2xl font-semibold">Not Found</h1>
+        <p className="flexbox text-center"><Link href="/" className="text-gray-500 underline">Back to Home</Link></p>
+      </div>
     </div>
   );
-}
+};
 
-export default Page;
+export default NotFound;
