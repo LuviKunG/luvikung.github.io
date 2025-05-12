@@ -66,8 +66,6 @@ const ThreeScene: FunctionComponent = () => {
         z: lerp(scale, -scale, Math.random()),
       }
 
-      console.log('randomDeltaRotation', randomDeltaRotation);
-
       function animate() {
         requestAnimationFrame(animate);
         const delta = clock.getDelta();
