@@ -1,9 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import monokaiColorSchemes from './data/palette';
 import ColorBox from './components/colorbox';
 
 export default function Page() {
+  const [activeScheme, setActiveScheme] = useState(0);
+
   const handleColorBoxClick = (color: string) => {
     navigator.clipboard
       .writeText(color)
@@ -15,31 +18,60 @@ export default function Page() {
       });
   };
 
+  const scheme = monokaiColorSchemes[activeScheme];
+
   return (
-    <div className='p-6 font-sans bg-gray-900 min-h-screen text-white'>
-      <h1 className='text-4xl font-bold mb-8 text-white'>
-        Monokai Color Palette
-      </h1>
-      <div className='flex flex-col gap-8'>
-        {monokaiColorSchemes.map(scheme => (
-          <div key={scheme.name} className='mb-6'>
-            <h2 className='text-2xl font-semibold mb-4 text-gray-200'>
+    <div className='flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black'>
+      <main className='flex min-h-screen w-full max-w-6xl flex-col items-center py-8 px-8 bg-white dark:bg-black'>
+        <h1 className='text-4xl font-bold mb-8 text-gray-900 dark:text-white'>
+          Monokai Color Palette
+        </h1>
+
+        {/* Color Scheme Switcher */}
+        <div className='w-auto mb-6'>
+          <div className='flex flex-wrap gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg justify-center'>
+            {monokaiColorSchemes.map((s, index) => (
+              <button
+                key={s.name}
+                onClick={() => setActiveScheme(index)}
+                className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                  activeScheme === index
+                    ? 'bg-blue-500 text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
+                }`}
+              >
+                {s.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Active Scheme Colors */}
+        <div className='w-full max-w-4xl flex justify-center'>
+          <div className='w-full'>
+            <h2 className='text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200'>
               {scheme.name}
             </h2>
-            <div className='flex flex-wrap gap-3'>
+            <div className='flex flex-wrap gap-4'>
               {scheme.colors.map(color => (
                 <div
                   key={color.name}
-                  className='relative'
+                  className='flex flex-col items-center cursor-pointer'
                   onClick={() => handleColorBoxClick(color.color)}
                 >
                   <ColorBox color={color.color} />
+                  <p className='mt-2 text-sm text-gray-700 dark:text-gray-300'>
+                    {color.name}
+                  </p>
+                  <p className='text-xs text-gray-500 dark:text-gray-400'>
+                    {color.color}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
