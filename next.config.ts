@@ -1,14 +1,18 @@
 import type { NextConfig } from 'next';
 
+const isElectron = process.env.ELECTRON === 'true';
+
 const nextConfig: NextConfig = {
   output: 'export',
-  distDir: 'out',
-  // basePath: '/base',
-  // assetPrefix: '/base/',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
+  // Configure for Electron
+  ...(isElectron && {
+    distDir: 'out',
+    assetPrefix: './',
+  }),
 };
 
 export default nextConfig;
