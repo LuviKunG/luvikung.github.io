@@ -24,28 +24,31 @@ export default function Home() {
           <div className='flex gap-2 bg-gray-100 p-1 rounded-lg'>
             <button
               onClick={() => setActiveComponent(TabType.SPLITTER)}
-              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors ${activeComponent === TabType.SPLITTER
-                ? 'bg-blue-500 text-white shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-                }`}
+              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors ${
+                activeComponent === TabType.SPLITTER
+                  ? 'bg-blue-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
             >
               Channel Splitter
             </button>
             <button
               onClick={() => setActiveComponent(TabType.COMBINER)}
-              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors ${activeComponent === TabType.COMBINER
-                ? 'bg-blue-500 text-white shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-                }`}
+              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors ${
+                activeComponent === TabType.COMBINER
+                  ? 'bg-blue-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
             >
               Channel Combiner
             </button>
             <button
               onClick={() => setActiveComponent(TabType.RESIZER)}
-              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors ${activeComponent === TabType.RESIZER
-                ? 'bg-blue-500 text-white shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-                }`}
+              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors ${
+                activeComponent === TabType.RESIZER
+                  ? 'bg-blue-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
             >
               Texture Resizer
             </button>

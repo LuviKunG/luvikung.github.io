@@ -1,0 +1,61 @@
+{
+  "name": "Default",
+  "colors": [
+    {
+      "color": "#f92672",
+      "name": "Red"
+    },
+    {
+      "color": "#fd971f",
+      "name": "Orange"
+    },
+    {
+      "color": "#e6db74",
+      "name": "Yellow"
+    },
+    {
+      "color": "#a6e22e",
+      "name": "Green"
+    },
+    {
+      "color": "#66d9ef",
+      "name": "Cyan"
+    },
+    {
+      "color": "#a1efe4",
+      "name": "Sky"
+    },
+    {
+      "color": "#1990EF",
+      "name": "Blue"
+    },
+    {
+      "color": "#ae81ff",
+      "name": "Violet"
+    },
+    {
+      "color": "#fd5ff0",
+      "name": "Purple"
+    },
+    {
+      "color": "#272822",
+      "name": "Background"
+    },
+    {
+      "color": "#3e3d32",
+      "name": "Foreground"
+    },
+    {
+      "color": "#75715e",
+      "name": "Comments"
+    },
+    {
+      "color": "#f8f8f2",
+      "name": "Plain Text"
+    },
+    {
+      "color": "#cfcfc2",
+      "name": "Gray"
+    }
+  ]
+}

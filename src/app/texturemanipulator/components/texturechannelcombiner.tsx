@@ -305,9 +305,9 @@ export default function TextureChannelCombiner() {
       <h2 className='text-xl font-bold'>Texture Channel Combiner</h2>
 
       <p className='text-gray-600 text-sm'>
-        Upload separate channel textures to combine them into a single texture. For
-        channels without files, you can select default values (Black, Gray, or
-        White).
+        Upload separate channel textures to combine them into a single texture.
+        For channels without files, you can select default values (Black, Gray,
+        or White).
       </p>
 
       {/* Channel Upload Section */}
@@ -534,10 +534,11 @@ export default function TextureChannelCombiner() {
         <button
           onClick={combineChannels}
           disabled={!canCombine || isProcessing}
-          className={`px-4 py-2 rounded font-medium ${canCombine && !isProcessing
+          className={`px-4 py-2 rounded font-medium ${
+            canCombine && !isProcessing
               ? 'bg-blue-500 text-white hover:bg-blue-600'
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+          }`}
         >
           {isProcessing ? 'Combining...' : 'Combine Channels'}
         </button>

@@ -192,10 +192,11 @@ export default function TextureChannelSplitter() {
                 setIsGrayscale(!isGrayscale);
                 updateChannelImages(!isGrayscale);
               }}
-              className={`px-4 py-2 rounded font-medium transition-colors ${isGrayscale
+              className={`px-4 py-2 rounded font-medium transition-colors ${
+                isGrayscale
                   ? 'bg-blue-500 text-white hover:bg-blue-600'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
+              }`}
             >
               Grayscale
             </button>

@@ -9,11 +9,19 @@ const ThreeScene: FunctionComponent = () => {
 
   useEffect(() => {
     // Set up the canvas and renderer
-    const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current!, antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current!,
+      antialias: true,
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // Set up the camera and renderer
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      100
+    );
     camera.position.z = 5;
 
     // Set up the scene
@@ -46,8 +54,8 @@ const ThreeScene: FunctionComponent = () => {
 
     // Load mesh and add to scene
     const loader = new OBJLoader();
-    loader.load('/logo.obj', (logo) => {
-      logo.traverse((child) => {
+    loader.load('/logo.obj', logo => {
+      logo.traverse(child => {
         const mesh = child as THREE.Mesh;
         if (mesh.isMesh) {
           mesh.material = whiteMaterial;
@@ -64,7 +72,7 @@ const ThreeScene: FunctionComponent = () => {
         x: lerp(scale, -scale, Math.random()),
         y: lerp(scale, -scale, Math.random()),
         z: lerp(scale, -scale, Math.random()),
-      }
+      };
 
       function animate() {
         requestAnimationFrame(animate);
@@ -81,10 +89,11 @@ const ThreeScene: FunctionComponent = () => {
         setTimeout(() => {
           requestAnimationFrame(animateTick);
         }, 150 * Math.random());
-        logo.traverse((child) => {
+        logo.traverse(child => {
           const mesh = child as THREE.Mesh;
           if (mesh.isMesh) {
-            mesh.material = Math.random() > 0.1 ? whiteMaterial : whiteMaterialWireframe;
+            mesh.material =
+              Math.random() > 0.1 ? whiteMaterial : whiteMaterialWireframe;
           }
         });
       }
@@ -99,7 +108,7 @@ const ThreeScene: FunctionComponent = () => {
       renderer.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-    }
+    };
 
     // Add event listener for window resize
     window.addEventListener('resize', handleResize);
@@ -110,22 +119,22 @@ const ThreeScene: FunctionComponent = () => {
       // Clean up the event listener and renderer on component unmount
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
-    }
+    };
   }, []);
 
   return (
     <>
-      <canvas ref={canvasRef} className="w-full h-full" />
+      <canvas ref={canvasRef} className='w-full h-full' />
     </>
   );
 };
 
 const Page: FunctionComponent = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className='flex items-center justify-center h-screen'>
       <ThreeScene />
     </div>
   );
-}
+};
 
 export default Page;

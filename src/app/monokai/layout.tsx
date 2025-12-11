@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Texture Manipulator',
-  description: 'A web application for manipulating textures channels.',
+  title: 'Monokai Theme',
+  description: 'A Monokai theme palette for the application.',
   authors: [
     {
       name: 'Thanut Panichyotai (@LuviKunG)',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     },
   ],
   icons: {
-    icon: '/texturemanipulator/favicon.ico',
+    icon: '/monokai/favicon.ico',
   },
 };
 
