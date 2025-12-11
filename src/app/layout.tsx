@@ -1,7 +1,7 @@
-import React, { FC as FunctionComponent, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '../styles/globals.css';
+import './globals.css';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   }
 };
 
-const Layout: FunctionComponent<Readonly<{ children: ReactNode }>> = ({ children }) => {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
       <body className={`${inter.variable} antialiased`}>
@@ -46,5 +46,3 @@ const Layout: FunctionComponent<Readonly<{ children: ReactNode }>> = ({ children
     </html>
   );
 };
-
-export default Layout;
