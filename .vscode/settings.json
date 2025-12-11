@@ -1,0 +1,26 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/Thumbs.db": true,
+    ".gitignore": true,
+    ".markdownlint.json": true,
+    ".next": true,
+    ".prettierignore": true,
+    ".prettierrc": true,
+    ".vscode": true,
+    "eslint.config.*": true,
+    "next-env.d.ts": true,
+    "node_modules": true,
+    "package-lock.json": true,
+    "pnpm-lock.yaml": true,
+    "postcss.config.*": true,
+    "tsconfig.json": true,
+    "tsconfig.*.json": true,
+    "yarn.lock": true
+  }
+}
