@@ -34,10 +34,11 @@ export default function Page() {
               <button
                 key={s.name}
                 onClick={() => setActiveScheme(index)}
-                className={`px-4 py-2 rounded-md font-medium transition-colors ${activeScheme === index
-                  ? 'bg-blue-500 text-white shadow-sm'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
-                  }`}
+                className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                  activeScheme === index
+                    ? 'bg-blue-500 text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
+                }`}
               >
                 {s.name}
               </button>
