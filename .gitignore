@@ -15,7 +15,6 @@
 
 # next.js
 /.next/
-# /out/ - Use for deployment
 /dist/
 /release/
 
@@ -41,6 +40,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# package locks
-package-lock.json

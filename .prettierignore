@@ -11,9 +11,10 @@ yarn.lock
 .env.local
 
 # Ignore output directories
-coverage
-dist
-out
+/coverage
+/dist
+/release
+/out
 
 # Don't format images and icons
 public/**/*.svg
