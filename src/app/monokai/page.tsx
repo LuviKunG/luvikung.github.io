@@ -34,11 +34,10 @@ export default function Page() {
               <button
                 key={s.name}
                 onClick={() => setActiveScheme(index)}
-                className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                  activeScheme === index
-                    ? 'bg-blue-500 text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
-                }`}
+                className={`px-4 py-2 rounded-md font-medium transition-colors ${activeScheme === index
+                  ? 'bg-blue-500 text-white shadow-sm'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
+                  }`}
               >
                 {s.name}
               </button>
@@ -47,12 +46,9 @@ export default function Page() {
         </div>
 
         {/* Active Scheme Colors */}
-        <div className='w-full max-w-4xl flex justify-center'>
+        <div className='w-full max-w-4xl'>
           <div className='w-full'>
-            <h2 className='text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200'>
-              {scheme.name}
-            </h2>
-            <div className='flex flex-wrap gap-4'>
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-4'>
               {scheme.colors.map(color => (
                 <div
                   key={color.name}
