@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+@plugin 'tailwind-scrollbar';
+
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+}
+
+#__next {
+  height: 100%;
+}
+
+.font-noto-sans-mono {
+  font-family: 'Noto Sans Mono', monospace;
+}
