@@ -13,7 +13,7 @@ import {
   useThree,
 } from '@luvikung/three-next';
 
-import createInstance from './components/instances/page';
+import createInstance from './components/instances/logo';
 
 const hexToNumber = (hex: string) => parseInt(hex.replace('#', ''), 16);
 

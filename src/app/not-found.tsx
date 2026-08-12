@@ -10,7 +10,7 @@ import {
   useThree,
 } from '@luvikung/three-next';
 
-import createInstance from './components/instances/not-found';
+import createInstance from './components/instances/cross';
 
 const Scene: FunctionComponent = () => {
   const { resetError } = useThree();
