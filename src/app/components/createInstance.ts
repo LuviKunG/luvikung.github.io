@@ -3,6 +3,10 @@ import { OBJLoader } from 'three/examples/jsm/Addons.js';
 
 import type { ThreeInstance } from '@luvikung/three-next';
 
+type ObjectThreeInstance = ThreeInstance & {
+  setColor: (color: number) => void;
+};
+
 export interface ObjSceneConfig {
   objUrl: string;
   color: number;
@@ -18,7 +22,9 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
  * page's cross scene: loads a single .obj mesh, gives it a random per-axis
  * spin, and optionally flickers its material between solid and wireframe.
  */
-export function createObjSceneInstance(config: ObjSceneConfig): ThreeInstance {
+export function createObjSceneInstance(
+  config: ObjSceneConfig
+): ObjectThreeInstance {
   const { objUrl, color, fov, scale, enableFlicker = false } = config;
 
   // Set up the camera and scene
@@ -121,6 +127,13 @@ export function createObjSceneInstance(config: ObjSceneConfig): ThreeInstance {
     camera.updateProjectionMatrix();
   };
 
+  const setColor = (newColor: number) => {
+    solidMaterial.color.set(newColor);
+    if (wireframeMaterial) {
+      wireframeMaterial.color.set(newColor);
+    }
+  };
+
   // Release GPU resources and stop the flicker tick
   const dispose = () => {
     if (flickerTimeoutId !== null) {
@@ -136,5 +149,7 @@ export function createObjSceneInstance(config: ObjSceneConfig): ThreeInstance {
     });
   };
 
-  return { update, render, onResize, dispose };
+  return { update, render, onResize, setColor, dispose };
 }
+
+export type { ObjectThreeInstance };

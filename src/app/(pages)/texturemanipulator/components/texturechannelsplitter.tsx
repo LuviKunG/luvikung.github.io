@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState, useRef, ChangeEvent, DragEvent } from 'react';
+import { useState, useRef, DragEvent } from 'react';
 import DragDropUploadBig from './dragdropuploadbig';
 
 // Helper type for our channel processing

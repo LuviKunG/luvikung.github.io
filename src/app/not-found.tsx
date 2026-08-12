@@ -10,7 +10,7 @@ import {
   useThree,
 } from '@luvikung/three-next';
 
-import createCrossInstance from './not-found-instance';
+import createInstance from './components/instances/not-found';
 
 const Scene: FunctionComponent = () => {
   const { resetError } = useThree();
@@ -33,7 +33,7 @@ const Scene: FunctionComponent = () => {
 const NotFound: FunctionComponent = () => {
   return (
     <div className='relative flex items-center justify-center h-screen'>
-      <ThreeProvider onCreate={createCrossInstance}>
+      <ThreeProvider onCreate={createInstance}>
         <Scene />
       </ThreeProvider>
       <div className='absolute text-white' style={{ zIndex: 1, bottom: '1em' }}>
