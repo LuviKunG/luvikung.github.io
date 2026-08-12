@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 import { isDebugging } from '@/env';
 
@@ -47,23 +48,57 @@ const createInstance = (options?: unknown): TestInstance => {
   directionalLight.position.set(5, 10, 7.5);
   scene.add(directionalLight);
 
-  // Add spinning cube for testing
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshStandardMaterial({ color: 0x0077ff });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+  // Add spinning logo model for testing. A group is used as a placeholder
+  // so rotation can be applied immediately, before the model has finished
+  // loading asynchronously.
+  const logo = new THREE.Group();
+  scene.add(logo);
 
-  // Function to update the cube's rotation based on the elapsed time.
-  const updateCube = (delta: number) => {
+  const material = new THREE.MeshStandardMaterial({ color: 0x0077ff });
+
+  const loader = new OBJLoader();
+  loader.load(
+    '/logo.obj',
+    (object) => {
+      // Center the loaded model on the origin and scale it to roughly the
+      // same size as the test cube it replaced.
+      const box = new THREE.Box3().setFromObject(object);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+
+      object.position.sub(center);
+
+      const maxDimension = Math.max(size.x, size.y, size.z);
+      const scale = maxDimension > 0 ? 2 / maxDimension : 1;
+      object.scale.setScalar(scale);
+
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.material = material;
+        }
+      });
+
+      logo.add(object);
+    },
+    undefined,
+    (error) => {
+      if (isDebugging) {
+        console.error('Failed to load logo model', error);
+      }
+    }
+  );
+
+  // Function to update the logo's rotation based on the elapsed time.
+  const updateLogo = (delta: number) => {
     const anglePerSecond = 45;
     const anglePerFrame = THREE.MathUtils.degToRad(anglePerSecond) * delta;
-    cube.rotation.x += anglePerFrame;
-    cube.rotation.y += anglePerFrame;
+    logo.rotation.x += anglePerFrame;
+    logo.rotation.y += anglePerFrame;
   };
 
-  // Main update function that will be called on each animation frame, which currently updates the cube's rotation.
+  // Main update function that will be called on each animation frame, which currently updates the logo's rotation.
   const update = (delta: number) => {
-    updateCube(delta);
+    updateLogo(delta);
   };
 
   const render = (renderer: THREE.WebGLRenderer) => {
@@ -72,7 +107,11 @@ const createInstance = (options?: unknown): TestInstance => {
 
   // Function to handle canvas resizing, updating the camera's aspect ratio and projection matrix accordingly.
   const dispose = () => {
-    geometry.dispose();
+    logo.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.geometry.dispose();
+      }
+    });
     material.dispose();
   };
 
