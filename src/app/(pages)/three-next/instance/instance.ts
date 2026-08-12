@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import stats from 'stats.js';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 import { isDebugging } from '@/env';
@@ -11,6 +12,9 @@ const createInstance = (options?: unknown): TestInstance => {
 
   // camera
   const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+
+  // stats.js for performance monitoring
+  const statsInstance = new stats();
 
   const onResize = (canvas: HTMLCanvasElement) => {
     const rect = canvas.getBoundingClientRect();
@@ -59,7 +63,7 @@ const createInstance = (options?: unknown): TestInstance => {
   const loader = new OBJLoader();
   loader.load(
     '/logo.obj',
-    (object) => {
+    object => {
       // Center the loaded model on the origin and scale it to roughly the
       // same size as the test cube it replaced.
       const box = new THREE.Box3().setFromObject(object);
@@ -72,7 +76,7 @@ const createInstance = (options?: unknown): TestInstance => {
       const scale = maxDimension > 0 ? 2 / maxDimension : 1;
       object.scale.setScalar(scale);
 
-      object.traverse((child) => {
+      object.traverse(child => {
         if (child instanceof THREE.Mesh) {
           child.material = material;
         }
@@ -81,7 +85,7 @@ const createInstance = (options?: unknown): TestInstance => {
       logo.add(object);
     },
     undefined,
-    (error) => {
+    error => {
       if (isDebugging) {
         console.error('Failed to load logo model', error);
       }
@@ -98,7 +102,9 @@ const createInstance = (options?: unknown): TestInstance => {
 
   // Main update function that will be called on each animation frame, which currently updates the logo's rotation.
   const update = (delta: number) => {
+    statsInstance.begin();
     updateLogo(delta);
+    statsInstance.end();
   };
 
   const render = (renderer: THREE.WebGLRenderer) => {
@@ -107,7 +113,7 @@ const createInstance = (options?: unknown): TestInstance => {
 
   // Function to handle canvas resizing, updating the camera's aspect ratio and projection matrix accordingly.
   const dispose = () => {
-    logo.traverse((child) => {
+    logo.traverse(child => {
       if (child instanceof THREE.Mesh) {
         child.geometry.dispose();
       }
@@ -129,6 +135,7 @@ const createInstance = (options?: unknown): TestInstance => {
     onResize,
     dispose,
     setCameraPosition,
+    stats: statsInstance,
   };
 };
 

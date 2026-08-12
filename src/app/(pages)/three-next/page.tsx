@@ -24,7 +24,7 @@ function PageContent(props: {
   setDevicePixelRatio: (value: number | null) => void;
 }) {
   // Access the Three.js instance and related functions from the context.
-  const { rendererRef, instanceRef, optionsRef, error, resetError } =
+  const { rendererRef, instanceRef, optionsRef, error, resetError, isReady } =
     useThree<TestInstance>();
   // Access the current theme (light/dark) for styling purposes.
   const theme = useTheme();
@@ -99,6 +99,26 @@ function PageContent(props: {
     const { setCameraPosition } = instanceRef.current;
     setCameraPosition(0, cameraPositionY, cameraPositionZ);
   }, [cameraPositionY, cameraPositionZ]);
+
+  // Effect to append the stats.js DOM element to the document body when the Three.js instance is ready, and clean up on unmount.
+  useEffect(() => {
+    if (isReady && instanceRef.current) {
+      const { document } = globalThis;
+      const { stats } = instanceRef.current;
+      if (document && stats && showDebug) {
+        const statsDom = stats.dom;
+        document.body.appendChild(statsDom);
+        stats.showPanel(0); // Show FPS panel
+        statsDom.style.position = 'absolute';
+        statsDom.style.top = '0px';
+        statsDom.style.right = '0px';
+        statsDom.style.left = 'auto';
+        return () => {
+          document.body.removeChild(statsDom);
+        };
+      }
+    }
+  }, [isReady, showDebug]);
 
   return (
     <div
